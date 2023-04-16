@@ -1,12 +1,22 @@
 import { App, Plugin } from 'vue'
-import { Crestron } from './types/Crestron'
 import { CrestronOptions } from './types/CrestronOptions'
 import * as CrComLib from 'ch5-crcomlib-lite'
 import * as WebXPanel from '@crestron/ch5-webxpanel'
 
 declare module 'vue' {
   interface ComponentCustomProperties {
-    $coloredText: Crestron
+    $crestron: {
+      CrComLib: {
+        isCrestronTouchscreen: Function
+        bridgeReceiveIntegerFromNative: typeof CrComLib.bridgeReceiveIntegerFromNative
+        bridgeReceiveBooleanFromNative: typeof CrComLib.bridgeReceiveBooleanFromNative
+        bridgeReceiveStringFromNative: typeof CrComLib.bridgeReceiveStringFromNative
+        bridgeReceiveObjectFromNative: typeof CrComLib.bridgeReceiveObjectFromNative
+        unsubscribeState: typeof CrComLib.unsubscribeState
+        subscribeState: typeof CrComLib.subscribeState
+        publishEvent: typeof CrComLib.publishEvent
+      }
+    }
   }
 }
 
@@ -47,7 +57,18 @@ function updateDialogLicenseInfo(detail: any) {
 // The Install function used by Vue to register the plugin
 export const CrestronPlugin: Plugin = {
   install(app: App, options: CrestronOptions) {
-    app.config.globalProperties.$crestron.CrComLib = CrComLib
+    app.config.globalProperties.$crestron = {
+      CrComLib: {
+        isCrestronTouchscreen: CrComLib.isCrestronTouchscreen,
+        bridgeReceiveIntegerFromNative: CrComLib.bridgeReceiveIntegerFromNative,
+        bridgeReceiveBooleanFromNative: CrComLib.bridgeReceiveBooleanFromNative,
+        bridgeReceiveStringFromNative: CrComLib.bridgeReceiveStringFromNative,
+        bridgeReceiveObjectFromNative: CrComLib.bridgeReceiveObjectFromNative,
+        unsubscribeState: CrComLib.unsubscribeState,
+        subscribeState: CrComLib.subscribeState,
+        publishEvent: CrComLib.publishEvent
+      }
+    }
     if (typeof document === 'undefined' || typeof window === 'undefined') {
       return
     }
