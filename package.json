@@ -1,7 +1,11 @@
 {
   "name": "@plawall/vue-crestron-plugin",
   "version": "0.0.1",
-  "description": "",
+  "description": "Vue Plugin to load CrComLib and WebXPanel",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/philiplawall/vue-crestron-plugin.git"
+  },
   "main": "dist/vue-crestron-plugin.js",
   "types": "dist/@types/index.d.ts",
   "type": "module",
