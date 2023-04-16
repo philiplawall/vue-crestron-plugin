@@ -1,20 +1,42 @@
 {
-  "name": "vue-crestron-plugin",
-  "version": "1.0.0",
+  "name": "@plawall/vue-crestron-plugin",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/vue-crestron-plugin.js",
+  "types": "dist/@types/index.d.ts",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "run-p type-check build-only",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --noEmit",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "format": "prettier --write src/"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "rollup": "^3.20.3",
-    "rollup-plugin-clear": "^2.0.7",
-    "rollup-plugin-typescript2": "^0.34.1",
-    "rollup-plugin-vue": "^6.0.0",
-    "typescript": "^5.0.4",
+  "peerDependencies": {
     "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.0",
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@types/node": "^18.15.11",
+    "@vue/eslint-config-prettier": "^7.1.0",
+    "@vue/eslint-config-typescript": "^11.0.2",
+    "eslint": "^8.38.0",
+    "eslint-plugin-vue": "^9.11.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.7",
+    "rollup-plugin-typescript-paths": "^1.4.0",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.4",
+    "vite": "^4.2.1",
+    "vue-tsc": "^1.2.0"
+  },
+  "dependencies": {
+    "@crestron/ch5-webxpanel": "^2.0.0",
+    "ch5-crcomlib-lite": "file:../ch5-crcomlib-lite"
   }
 }
